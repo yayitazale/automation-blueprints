@@ -1,0 +1,63 @@
+blueprint:
+  name: 2.0TD Period selector from PVPC
+  description: Using PVPC sensors period attribute select a period on the energy utility meter. 
+  domain: automation
+  source_url: https://gitlab.com/yayitazale/automation-blueprints/-/blob/main/period_selector.yaml
+  input:
+    pvpc_entity:
+      name: Sensor PVPC
+      description: Selecciona la entidad sensor PVPC
+      selector:
+        entity:
+          domain: sensor
+    select_entity:
+      name: Contador
+      description: Selecciona la entidad select del contador
+      selector:
+        entity:
+          domain: select
+
+trigger:
+  platform: state
+  entity_id:
+  - sensor.pvpc
+  attribute: period
+  
+condition: []
+  
+action:
+  choose:
+  - conditions:
+    - condition: state
+      entity_id: sensor.pvpc
+      attribute: period
+      state: P1
+    sequence:
+    - service: select.select_option
+      data:
+        option: P1
+      target:
+        entity_id: !input select_entity
+  - conditions:
+    - condition: state
+      entity_id: sensor.pvpc
+      attribute: period
+      state: P2
+    sequence:
+    - service: select.select_option
+      data:
+        option: P2
+      target:
+        entity_id: !input select_entity
+  - conditions:
+    - condition: state
+      entity_id: sensor.pvpc
+      attribute: period
+      state: P3
+    sequence:
+    - service: select.select_option
+      data:
+        option: P3
+      target:
+        entity_id: !input select_entity
+mode: single
