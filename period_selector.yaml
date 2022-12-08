@@ -2,7 +2,7 @@ blueprint:
   name: 2.0TD Period selector from PVPC
   description: Using PVPC sensors period attribute select a period on the energy utility meter. 
   domain: automation
-  source_url: https://gitlab.com/yayitazale/automation-blueprints/-/blob/main/period_selector.yaml
+  source_url: https://github.com/yayitazale/automation-blueprints/blob/main/period_selector.yaml
   input:
     pvpc_entity:
       name: Sensor PVPC
